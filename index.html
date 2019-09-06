@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="https://fonts.googleapis.com/css?family=Manjari:400,700&display=swap" rel="stylesheet">
         <title>Socket.IO chat</title>
         <link href="./style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <h1>Wonder Chat</h1>
-
-        <div class="change_username">
-            <input id="username" type="text" />
-            <button id="send_username" type="button">Change username</button>=
+        <div class="wonderChat">
+            <h1>Wonder Chat</h1>
+            <div class="chatWindow">
+                <ul id="chatline"></ul>
+                <div id="feedback"></div>
+            </div>
+            <div class="input">
+                <input id="username" type="text" placeholder="Enter a username" /> 
+                <select id="color">
+                    <option value="white">White</option>
+                    <option value="firebrick">Red</option>
+                    <option value="orange">Orange</option>
+                    <option value="gold">Yellow</option>
+                    <option value="palegreen">Green</option>
+                    <option value="deepskyblue">Blue</option>
+                    <option value="mediumslateblue">Purple</option>
+                    <option value="violet">Pink</option>
+                </select>
+                <input id="message" type="text" placeholder="Enter a message"/>
+                <button id="send">Send</button>
+            </div>
         </div>
 
-        <div class="chatbox">
-            <ul id="messages"></ul>
-        </div>
-
-        <div class="message_input">
-            <form action="">
-            <input id="m" autocomplete="off" /><button>Send</button>
-            </form>
-        </div>
-        
         <script src="/socket.io/socket.io.js"></script>
         <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-        <script>
-            $(function() {
-                var socket = io();
-                $('form').submit(function(e) {
-                    e.preventDefault();
-                    socket.emit('chat message', $('#m').val());
-                    $('#m').val('');
-                    return false;
-                });
-                socket.on('chat message', function(msg) {
-                    $('#messages').append($('<li>').text(msg.username + ": " + msg.message));
-                });
-
-            });
-        </script>
+        <script type="text/javascript" src="/public/chat.js"></script>
     </body>
 </html>
