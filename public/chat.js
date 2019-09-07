@@ -18,13 +18,13 @@ send.click(function() {
 });
 // Listen on message
 socket.on('chat', function(data) {
-    if (username.val() === "") {
+    if (data.username === "") {
         alert("Please enter a username");
     }
-    if (message.val() === "") {
+    if (data.message === "") {
         alert("Please enter a message");
     }
-    else if (message.val() !== "" & username.val() !== "") {
+    else if (data.username !== "" & data.message !== "") {
         feedback.html('');
         message.val('');
         if (data.color === ('firebrick' || 'deepskyblue' || 'mediumslateblue')) {
@@ -51,6 +51,8 @@ message.bind('keypress', function(e) {
 socket.on('typing', function(data) {
     feedback.html($('<p><em>').text(data + " is typing a message..."));
 });
+
+socket.emit('connections', 'hello WOrd');
 
 // Listen for connection length
 socket.on('connections', function(data) {

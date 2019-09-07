@@ -1,10 +1,12 @@
-var express = require('express');
-var socket = require('socket.io');
+const express = require('express');
+const socket = require('socket.io');
 
 // App setup
 var app = express();
 var http = require('http').createServer(app);
 var io = socket(http);
+
+var PORT = process.env.PORT || 3000;
 
 // Static files
 app.use(express.static('public'));
@@ -24,7 +26,9 @@ io.on('connection', function(socket) {
     connections.push(socket);
     console.log('Connected: %s sockets connected', connections.length);
 
-    io.emit('connections', connections.length);
+    socket.on('connections', function(data) {
+        socket.emit('connections', connections.length);
+    });
 
     // Emit message
     socket.on('chat', function(data) {
@@ -42,6 +46,6 @@ io.on('connection', function(socket) {
 });
 
 
-http.listen(process.env.PORT || 3000, function() {
-    console.log('listening on *:3000');
+http.listen(PORT, function() {
+    console.log(`listening ${PORT}`);
 });
