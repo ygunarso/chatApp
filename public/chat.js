@@ -6,7 +6,11 @@ var chatline = document.getElementById('chatline');
 var feedback = $('#feedback');
 var send = $("#send");
 var color = document.getElementById('color');
-var textColor;
+
+// CSS
+var textColor, float;
+
+socket.emit('connections');
 
 // Emit message
 send.click(function() {
@@ -25,15 +29,21 @@ socket.on('chat', function(data) {
         alert("Please enter a message");
     }
     else if (data.username !== "" & data.message !== "") {
-        feedback.html('');
-        message.val('');
-        if (data.color === ('firebrick' || 'deepskyblue' || 'mediumslateblue')) {
+        if (data.color === 'firebrick' || data.color === 'deepskyblue' || data.color === 'mediumslateblue') {
             textColor = 'white';
         }
         else {
             textColor = '#555555';
         }
-        chatline.innerHTML += '<li style=\'background-color: ' + data.color + '; color: ' + textColor + ';\'><strong>' + data.username + ': </strong>' + data.message + '</li>';
+        if (username.val() === data.username) {
+            float = 'right';
+        }
+        else {
+            float = 'left';
+        }
+        chatline.innerHTML += '<li style=\'background-color: ' + data.color + '; color: ' + textColor + '; float: ' + float + ';\'><strong>' + data.username + ': </strong>' + data.message + '</li>';
+        feedback.html('');
+        message.val('');
     }
 
 });
@@ -51,8 +61,6 @@ message.bind('keypress', function(e) {
 socket.on('typing', function(data) {
     feedback.html($('<p><em>').text(data + " is typing a message..."));
 });
-
-socket.emit('connections', 'hello WOrd');
 
 // Listen for connection length
 socket.on('connections', function(data) {

@@ -26,7 +26,7 @@ io.on('connection', function(socket) {
     connections.push(socket);
     console.log('Connected: %s sockets connected', connections.length);
 
-    socket.on('connections', function(data) {
+    socket.on('connections', function() {
         socket.emit('connections', connections.length);
     });
 
