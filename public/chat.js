@@ -6,6 +6,7 @@ var chatline = document.getElementById('chatline');
 var feedback = $('#feedback');
 var send = $("#send");
 var color = document.getElementById('color');
+var time = document.getElementById('time');
 
 // CSS
 var textColor, float;
@@ -29,19 +30,19 @@ socket.on('chat', function(data) {
         alert("Please enter a message");
     }
     else if (data.username !== "" & data.message !== "") {
-        if (data.color === 'firebrick' || data.color === 'deepskyblue' || data.color === 'mediumslateblue') {
-            textColor = 'white';
-        }
-        else {
-            textColor = '#555555';
-        }
         if (username.val() === data.username) {
             float = 'right';
         }
         else {
             float = 'left';
         }
-        chatline.innerHTML += '<li style=\'background-color: ' + data.color + '; color: ' + textColor + '; float: ' + float + ';\'><strong>' + data.username + ': </strong>' + data.message + '</li>';
+        chatline.innerHTML += '<li class=\'message\' style=\'color: ' + data.color 
+                            + '; border-color: ' + data.color 
+                            + '; float: ' + float 
+                            + ';\'><strong>' + data.username 
+                            + ': </strong>' + data.message + '</li>';
+        var now = new Date();
+        chatline.innerHTML += '<li class=\'time\' style=\'color: ' + data.color + ';\'>'+ now.getHours() + ':' + now.getMinutes() + '</li>';
         feedback.html('');
         message.val('');
     }

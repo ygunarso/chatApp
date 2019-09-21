@@ -1,37 +1,47 @@
 body { 
     font-family: 'Manjari', sans-serif;
+    background-color: #212121;
 }
 
 h1 {
     font-size: 20px;
     padding: 10px 20px;
-    color: navy;
+    color: #14ffec;
 }
 
 .wonderChat {
     max-width: 600px;
     margin: 30px auto;
-    border: 1px solid white;
+    border: 1px solid #14ffec;
+    background-color: #323232;
     box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
-    border-radius: 2px;
+    border-radius: 15px;
 }
 
 .chatWindow {
     height: 400px;
     overflow: auto;
-    background: #f9f9f9;
+    background-color: #212121;
 }
 
 ul {
     list-style-type: none;
 }
 
-#chatline li {
+#chatline .message {
     padding: 14px;
-    margin: 0 20px;
-    border-bottom: 1px solid #e9e9e9;
+    margin: 3px 20px;
+    border: 1px solid #14ffec;;
     border-radius: 15px;
     width: 60%;
+    background: #323232;
+    color: #14ffec;
+}
+
+#chatline .time {
+    padding: 14px 0;
+    margin: 8.5px 100px;
+    color: #14ffec;
 }
 
 #feedback p {
@@ -47,24 +57,31 @@ label {
     padding: 10px 20px;
 }
 
-input[type='text'] {
+input {
     font-family: 'Manjari', sans-serif;
     font-size: 16px;
-    width: 96.6%;
+    width: 96.4%;
     display: block;
-    border: 0;
-    background: #eeeeee;
+    background: #0d7377;
+    color: white;
     padding: 10px;
+    border: 1px solid #14ffec;
+
 }
 
 button {
-    background: navy;
-    color: white;
+    background: #323232;
+    color: #14ffec;
     font-size: 20px;
     border: 0;
     padding: 12px 0;
     width: 100%;
-    border-radius: 0 0 2px 2px;
+    border-radius: 0 0 15px 15px;
+}
+
+button:hover {
+    background: #14ffec;
+    color: #323232;
 }
 
 select {
@@ -72,7 +89,12 @@ select {
     font-size: 16px;
     width: 100%;
     display: block;
-    border: 0;
-    background: #eeeeee;
-    padding: 10px 0;
+    color: white;
+    border: 1px solid #14ffec;
+    background: #0d7377;
+    padding: 10px 8px;
+}
+
+::placeholder {
+    color: #212121;
 }
